@@ -8,33 +8,34 @@
 
         var name = "MyNewQuery";
 
-        var request = api.retrieve("QueryDefinition", ["CustomerKey", "ObjectID", "QueryText"], {
+        var request = api.retrieve("QueryDefinition", ["CustomerKey", "ObjectID", "QueryText", "CategoryID"], {
             Property: "CustomerKey", 
             SimpleOperator: "equals",
-            Value: "3BC9F092-828E-40AC-A8E7-46B734E5EACA"
+            Value: "PBRAGA_UseCase_TransactionETL"
         });
 
        var objectID = request.Results[0].ObjectID,
            queryText = request.Results[0].QueryText,
-           categoryID = request.Results[0].categoryId;
+           categoryID = request.Results[0].CategoryId;
 
-        var updated_query = queryText + ' where c.Id is NOT null ';
+        var updated_query = queryText + ' where p.userId is NOT null ';
 
         var config = {
             ObjectID: objectID,
             Description: "My updated query",
+            CategoryID: categoryID,
             TargetType: "DE",
             TargetUpdateType: "Overwrite",
+            QueryText: updated_query,
             DataExtensionTarget: {
-            Name: "MyDataExtension",
-            CustomerKey: targetKey
-            CategoryID: categoryID,
-            QueryText: updated_query;
+                Name: "PBRAGA_UseCase_TransactionETL",
+                CustomerKey: targetKey
+            }
        };
 
         var result = api.updateItem("QueryDefinition", config);
 
-        Write("version2"+Stringify(result));
+        Write("version6"+Stringify(result));
   
  } catch(error) {
 
