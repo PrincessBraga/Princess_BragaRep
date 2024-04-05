@@ -23,8 +23,13 @@
         var config = {
             ObjectID: objectID,
             Description: "My updated query",
+            TargetType: "DE",
+            TargetUpdateType: "Overwrite",
+            DataExtensionTarget: {
+            Name: "MyDataExtension",
+            CustomerKey: targetKey
             CategoryID: categoryID,
-            QueryText: updated_query
+            QueryText: updated_query;
        };
 
         var result = api.updateItem("QueryDefinition", config);
